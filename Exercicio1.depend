@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1496348058 source:c:\users\thenasker\desktop\lp\av2\exercicio1\exercicio1\main.cpp
+	<iostream>
+	<string>
+	<windows.h>
+	<fstream>
+	<ctime>
+	<sstream>
+	<dirent.h>
+	"Sudoku.h"
+
+1496171560 c:\users\thenasker\desktop\lp\av2\exercicio1\exercicio1\sudokulib.h
+
+1496341249 c:\users\thenasker\desktop\lp\av2\exercicio1\exercicio1\include\sudoku.h
+	<iostream>
+	<string>
+
+1496342428 source:c:\users\thenasker\desktop\lp\av2\exercicio1\exercicio1\src\sudoku.cpp
+	"Sudoku.h"
+	<iostream>
+	<string>
+	<fstream>
+
+1497640271 source:c:\users\thenasker\desktop\unifacs\lp\av2\exercicio1\exercicio1\main.cpp
+	<iostream>
+	<string>
+	<windows.h>
+	<fstream>
+	<ctime>
+	<sstream>
+	<dirent.h>
+	"Sudoku.h"
+
+1496341249 c:\users\thenasker\desktop\unifacs\lp\av2\exercicio1\exercicio1\include\sudoku.h
+	<iostream>
+	<string>
+
+1496342428 source:c:\users\thenasker\desktop\unifacs\lp\av2\exercicio1\exercicio1\src\sudoku.cpp
+	"Sudoku.h"
+	<iostream>
+	<string>
+	<fstream>
+

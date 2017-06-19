@@ -751,10 +751,10 @@ bool opcao2(){
 
     system("cls");
 
-    //C:\Users\thenasker\Desktop\LP\AV2\Exercicio1\Exercicio1
     cout << "Escreva a rota onde buscar o arquivo (Ex: C\\)\n" << endl;
     cin >> dir;
     list_dir(dir);
+
     cout << "Escreva o nome do arquivo (Ex: sudoku_facil.txt)\n" << endl;
     cin >> nome;
 

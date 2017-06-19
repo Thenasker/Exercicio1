@@ -73,6 +73,7 @@ bool finalizar(){
 
 }
 
+//A funçao percorre todas as posiçoes da matriz "matriz" ou da matriz "resultado" do objeto Sudoku dependendo do parametro matRes
 void mostrarSudoku(Sudoku &sudo, int matRes){
 
 
@@ -102,6 +103,7 @@ void mostrarSudoku(Sudoku &sudo, int matRes){
     cout << "\n\n";
 }
 
+//A funçao percorre a matriz do sudoku e insire um valor em cada posiçao. Se o usuario digitar "F" termina o que resta do vetor com 0
 void obterDeTeclado(Sudoku &sudo){
 
     system("cls");
@@ -172,6 +174,7 @@ void salvarArquivo(Sudoku &sudo){
     }
 }
 
+//Funçao que salva num arquivo o sudoku de modo "visual"
 void savePrint(Sudoku sudos[], int numSudos){
 
     char salvar=CHAR_VACIO;
@@ -234,6 +237,7 @@ void savePrint(Sudoku sudos[], int numSudos){
     }
 }
 
+//Funçao que percorre a matriz "erros" e pede ao usuario inserir um novo valor nas posiçoes com valor != -1
 void modificar(Sudoku &sudo){
 
     system("cls");
@@ -266,7 +270,7 @@ void modificar(Sudoku &sudo){
     }
 }
 
-
+//Funçao que tem tres partes: primeiro comprova os valores de cada fila e insire um erro se achar dois iguais (no caso o parametro adErros seja certo), depois faz o mesmo com as colunas e por ultimo com os subquadros.
 bool posicaoValida(int num, Sudoku &sudo, int i, int j, bool adErros){
 
     bool val = true;
@@ -314,6 +318,8 @@ bool posicaoValida(int num, Sudoku &sudo, int i, int j, bool adErros){
 
 }
 
+//A funçao tenta inserir os numeros vaalidos em ordem crescente (1->10) de esquerda pra direita e de cima para baixo. Quando chegar a um ponto que nao poder inserir nenhum valor de 1 a 10 volta ao começo e tenta com
+//o seguinte numero o mesmo sistema. até chegar a linha 10 (que nao existe) que entao devolve todo um ate a chamada original.
 int resolver(Sudoku &sudo, int i, int j){
 
     int num = 1;
@@ -321,7 +327,7 @@ int resolver(Sudoku &sudo, int i, int j){
         return 1;
     }
 
-
+    //Se o valor da posiçao (i,j) é distinto de zero chama a funçao para o seguinte quadro.
     if (sudo.ler(i,j,0) != 0) {
         if (j == 8) {
             if (resolver(sudo, i+1, 0)) return 1;
@@ -339,7 +345,7 @@ int resolver(Sudoku &sudo, int i, int j){
             } else {
                 if (resolver(sudo, i, j+1)) return 1;
             }
-            // We failed to find a valid value for this
+            // Se nao achar um valor posivel insire "0"
             sudo.insertarResult(i,j,0);
         }
     }
@@ -347,6 +353,9 @@ int resolver(Sudoku &sudo, int i, int j){
 
 }
 
+//A funçao comprova que todas as posiçoes que tem valor distinto de 0 cumplem as normas do jogo.
+//Se alguma posiçao esta errada da a opçao ao usuario de modificar os valores das posiçoes em conflito
+//Finalmente chama a funçao resolver para verificar que o sudoku é resoluvel.
 bool validar(Sudoku &sudo){
 
     char modif = CHAR_VACIO;
@@ -389,6 +398,7 @@ bool validar(Sudoku &sudo){
     }
 }
 
+//Funçao para listar os elementos de um diretorio.
 void list_dir(string dir){
 
     DIR *directorio;
@@ -408,6 +418,7 @@ void list_dir(string dir){
     closedir(directorio);
 }
 
+//troca duas linhas aleatoriamente.
 void barajarLinhas(Sudoku &sudo, int vezes){
 
     int aux=0;
@@ -427,6 +438,8 @@ void barajarLinhas(Sudoku &sudo, int vezes){
 
 
 }
+
+//troca duas colunas aleatoriamente.
 void barajarColunas(Sudoku &sudo, int vezes){
 
     int aux=0;
@@ -446,6 +459,8 @@ void barajarColunas(Sudoku &sudo, int vezes){
 
 
 }
+
+//troca duas colunas de subquadros aleatoriamente
 void barajarBlocosV(Sudoku &sudo, int vezes){
 
     int aux=0;
@@ -470,6 +485,8 @@ void barajarBlocosV(Sudoku &sudo, int vezes){
         col1=col2;
     }
 }
+
+//troca duas filas de subquadros aleatoriamente.
 void barajarBlocosH(Sudoku &sudo, int vezes){
 
 
@@ -496,6 +513,8 @@ void barajarBlocosH(Sudoku &sudo, int vezes){
     }
 
 }
+
+//transforma a matriz do sudoku em sua trasposta
 void trasponer(Sudoku &sudo){
 
     int aux[9][9];
@@ -514,6 +533,10 @@ void trasponer(Sudoku &sudo){
     }
 }
 
+//a funçao converte em 0 um numero aleatorio de posiçoes da matriz dependendo da dificuldade
+//o metodo consiste em tirar eses valores de forma aleatoria e comprovar se a matriz continua sendo resoluvel
+//se nao for, tira outros valores aleatoriamente ate que seja
+//É um metodo bem simples mas como a velocidade de procesamento é boa, nao precisa de nada mais complexo
 void tirarNums(Sudoku &sudo, int dificuldade){
     int n=0,i,j;
     Sudoku aux;
@@ -552,6 +575,9 @@ void tirarNums(Sudoku &sudo, int dificuldade){
     sudo = aux;
 }
 
+//Funçao para gerar sudokus.
+//Inicialmente gera um sudoku semente com os numeros em ordem mas cumplindo as normas do jogo.
+//Aleatoriamente chama as funçoes de trasposiçao n vezes entre 0 e 100 de modo que a probabilidade de ter dois sudokus iguais é muito pequena.
 void gerar(int dificuldade, int numSudokus){
 
     Sudoku sudos[numSudokus];
@@ -611,6 +637,8 @@ void gerar(int dificuldade, int numSudokus){
 
 }
 
+//A funçao gera um sudoku e armazena a soluçao na matriz "resultado"
+//O programa vai pedindo ao usuario valores  e até que sua matriz nao seja igual a matriz "resultado" nao da o sudoku por valido e o usuario como ganhador.
 void jogar(int dificuldade){
 
     Sudoku sudo, aux;
@@ -695,6 +723,7 @@ void jogar(int dificuldade){
 
 }
 
+//Funçoes que gerenciam as funcionalidades do programa
 bool opcao1(){
 
     system("cls");
